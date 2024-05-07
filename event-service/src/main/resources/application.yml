@@ -1,0 +1,9 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: event-service
+  cloud:
+    discovery:
+      enabled: true
