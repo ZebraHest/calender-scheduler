@@ -1,0 +1,34 @@
+spring:
+  application:
+    name=Api-gateway
+  #  cloud:
+  #    gateway:
+  #      routes:
+  #        - id: event-route
+  #          uri: ${EVENT-ROUTE:http://localhost:9091}
+  #          predicates:
+  #            - Path=/**
+  #          filters:
+  #            - AddResponseHeader=X-Powered-By, Gateway Service
+
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+        httpserver:
+          wiretap: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+logging:
+  level:
+    reactor:
+      netty: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
