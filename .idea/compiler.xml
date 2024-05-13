@@ -10,6 +10,7 @@
         <module name="Api-gateway" />
         <module name="user-service" />
         <module name="event-service" />
+        <module name="schedule-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="Api-gateway" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
       <module name="event-service" options="-parameters" />
+      <module name="schedule-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
