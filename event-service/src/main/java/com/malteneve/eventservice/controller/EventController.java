@@ -15,7 +15,8 @@ public class EventController {
     public @ResponseBody String createEvent(
             @RequestParam(value = "name") String name) {
         System.out.println("Starting to create event");
-        Event n = new Event(name, null, null, null, null, null);
+        Event n = new Event();
+        n.setTitle(name);
         eventRepository.save(n);
         return "Event created.";
     }
