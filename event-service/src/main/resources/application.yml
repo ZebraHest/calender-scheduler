@@ -8,6 +8,19 @@ spring:
     discovery:
       enabled: true
 
+  gateway:
+    httpclient:
+      wiretap: true
+      httpserver:
+        wiretap: true
+    globalcors:
+      cors-configurations:
+        '[/**]':
+          allowedOrigins: "http://localhost:4200"
+          allowedMethods:
+            - GET
+              - POST
+
 logging:
   level:
     reactor:

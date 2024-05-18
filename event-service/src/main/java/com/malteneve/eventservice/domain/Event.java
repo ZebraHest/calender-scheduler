@@ -5,9 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.List;
 
 @Entity
@@ -23,10 +23,10 @@ public class Event {
     private LocalDateTime endTime;
     private LocalDate repeatStartDate;
     private LocalDate repeatEndDate;
-    private Period period;
+    private Duration duration;
     private String userId;
-    private Boolean isStartTimePrecise;
-    private Boolean isEndTimePrecise;
+    private Boolean isFlexible = false;
+    private Boolean isRepeating = false;
     private List<DayOfWeek> repeatDays;
 
     public Event() {
@@ -80,12 +80,12 @@ public class Event {
         this.repeatEndDate = repeatEndDate;
     }
 
-    public Period getPeriod() {
-        return period;
+    public Duration getDuration() {
+        return duration;
     }
 
-    public void setPeriod(Period period) {
-        this.period = period;
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public String getUserId() {
@@ -96,20 +96,20 @@ public class Event {
         this.userId = userId;
     }
 
-    public Boolean getStartTimePrecise() {
-        return isStartTimePrecise;
+    public Boolean isFlexible() {
+        return isFlexible;
     }
 
-    public void setStartTimePrecise(Boolean startTimePrecise) {
-        isStartTimePrecise = startTimePrecise;
+    public void setIsFlexible(Boolean isFlexible) {
+        this.isFlexible = isFlexible;
     }
 
-    public Boolean getEndTimePrecise() {
-        return isEndTimePrecise;
+    public Boolean isRepeating() {
+        return isRepeating;
     }
 
-    public void setEndTimePrecise(Boolean endTimePrecise) {
-        isEndTimePrecise = endTimePrecise;
+    public void setIsRepeating(Boolean isRepeating) {
+        this.isRepeating = isRepeating;
     }
 
     public List<DayOfWeek> getRepeatDays() {

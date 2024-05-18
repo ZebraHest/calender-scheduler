@@ -13,11 +13,11 @@ public class EventController {
 
     @PostMapping("/add")
     public @ResponseBody String createEvent(
-            @RequestParam(value = "name") String name) {
+            @RequestBody Event event
+    ) {
         System.out.println("Starting to create event");
-        Event n = new Event();
-        n.setTitle(name);
-        eventRepository.save(n);
+
+        eventRepository.save(event);
         return "Event created.";
     }
 

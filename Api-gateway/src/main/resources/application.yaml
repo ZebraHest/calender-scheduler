@@ -1,18 +1,11 @@
 spring:
   application:
     name=Api-gateway
-  #  cloud:
-  #    gateway:
-  #      routes:
-  #        - id: event-route
-  #          uri: ${EVENT-ROUTE:http://localhost:9091}
-  #          predicates:
-  #            - Path=/**
-  #          filters:
-  #            - AddResponseHeader=X-Powered-By, Gateway Service
 
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       httpclient:
         wiretap: true
         httpserver:
@@ -20,10 +13,10 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
-            allowedMethods:
-              - GET
-              - POST
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
 logging:
   level:
     reactor:
