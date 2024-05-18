@@ -1,9 +1,9 @@
 package com.malteneve.scheduleservice.domain;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.List;
 
 //@Entity
@@ -18,10 +18,10 @@ public class Event {
     private LocalDateTime endTime;
     private LocalDate repeatStartDate;
     private LocalDate repeatEndDate;
-    private Period period;
+    private Duration duration;
     private String userId;
-    private Boolean isStartTimePrecise;
-    private Boolean isEndTimePrecise;
+    private Boolean isFlexible = false;
+    private Boolean isRepeating = false;
     private List<DayOfWeek> repeatDays;
 
     public Event() {
@@ -34,7 +34,7 @@ public class Event {
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -67,12 +67,12 @@ public class Event {
         this.repeatEndDate = repeatEndDate;
     }
 
-    public Period getPeriod() {
-        return period;
+    public Duration getDuration() {
+        return duration;
     }
 
-    public void setPeriod(Period period) {
-        this.period = period;
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public String getUserId() {
@@ -83,20 +83,12 @@ public class Event {
         this.userId = userId;
     }
 
-    public Boolean getStartTimePrecise() {
-        return isStartTimePrecise;
+    public Boolean getFlexible() {
+        return isFlexible;
     }
 
-    public void setStartTimePrecise(Boolean startTimePrecise) {
-        isStartTimePrecise = startTimePrecise;
-    }
-
-    public Boolean getEndTimePrecise() {
-        return isEndTimePrecise;
-    }
-
-    public void setEndTimePrecise(Boolean endTimePrecise) {
-        isEndTimePrecise = endTimePrecise;
+    public void setFlexible(Boolean flexible) {
+        isFlexible = flexible;
     }
 
     public List<DayOfWeek> getRepeatDays() {
@@ -105,5 +97,13 @@ public class Event {
 
     public void setRepeatDays(List<DayOfWeek> repeatDays) {
         this.repeatDays = repeatDays;
+    }
+
+    public Boolean getRepeating() {
+        return isRepeating;
+    }
+
+    public void setRepeating(Boolean repeating) {
+        isRepeating = repeating;
     }
 }
