@@ -123,22 +123,4 @@ public class Scheduler {
         }
         return expandedList;
     }
-
-    private boolean isConflict(Event lockedEvent, Event newEvent) {
-        //Start at the same time
-        if (newEvent.getStartTime().isEqual(lockedEvent.getStartTime()))
-            return true;
-
-        //Starts before and end after locked start
-        if (newEvent.getStartTime().isBefore(lockedEvent.getStartTime())
-                && newEvent.getEndTime().isAfter(lockedEvent.getStartTime()))
-            return true;
-
-        //Starts after locked start and before locked end
-        if (newEvent.getStartTime().isAfter(lockedEvent.getStartTime())
-                && newEvent.getStartTime().isBefore(lockedEvent.getEndTime()))
-            return true;
-
-        return false;
-    }
 }

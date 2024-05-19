@@ -23,15 +23,6 @@ public class SchedulerController {
     @Autowired
     Scheduler scheduler;
 
-    @GetMapping("/")
-    public void createEvent() {
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        Event[] objects = restTemplate.getForObject(eventAllUrl, Event[].class);
-
-    }
-
     @PostMapping("/update")
     public void updateSchedule() {
         RestTemplate restTemplate = new RestTemplate();
