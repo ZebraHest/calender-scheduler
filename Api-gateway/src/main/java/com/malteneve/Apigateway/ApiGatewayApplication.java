@@ -19,19 +19,20 @@ public class ApiGatewayApplication {
         return builder.routes()
                 .route(r -> r.path("/event/all")
                         .filters(f -> f
-                                .addResponseHeader("X-Powered-By", "Gateway Service")
                                 .stripPrefix(1))
                         .uri("http://localhost:8082"))
                 .route(r -> r.path("/event/add")
                         .filters(f -> f
-                                .addResponseHeader("X-Powered-By", "Gateway Service")
                                 .stripPrefix(1))
                         .uri("http://localhost:8082"))
                 .route(r -> r.path("/user/**")
                         .filters(f -> f
-                                .addResponseHeader("X-Powered-By", "Gateway Service")
                                 .stripPrefix(1))
                         .uri("http://localhost:8081"))
+                .route(r -> r.path("/scheduler/**")
+                        .filters(f -> f
+                                .stripPrefix(1))
+                        .uri("http://localhost:8083"))
                 .build();
     }
 
