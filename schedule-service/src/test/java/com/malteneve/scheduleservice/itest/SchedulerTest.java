@@ -4,6 +4,7 @@ import com.malteneve.scheduleservice.domain.Event;
 import com.malteneve.scheduleservice.domain.ScheduledEvent;
 import com.malteneve.scheduleservice.logic.Scheduler;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@SpringBootTest
 public class SchedulerTest {
 
     Scheduler scheduler = new Scheduler();

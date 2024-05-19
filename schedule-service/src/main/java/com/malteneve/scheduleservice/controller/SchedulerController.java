@@ -20,7 +20,8 @@ public class SchedulerController {
     private static final String eventAllUrl = "http://localhost:8082/all";
     @Autowired
     ScheduledEventRepository repository;
-    private Scheduler scheduler = new Scheduler();
+    @Autowired
+    Scheduler scheduler;
 
     @GetMapping("/")
     public void createEvent() {

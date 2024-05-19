@@ -16,6 +16,7 @@ public class ScheduledEvent {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String userId;
+    private Integer eventId;
 
     public String getTitle() {
         return title;
@@ -47,5 +48,13 @@ public class ScheduledEvent {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
     }
 }

@@ -3,8 +3,10 @@ package com.malteneve.eventservice;
 import com.malteneve.eventservice.domain.Event;
 import com.malteneve.eventservice.repository.EventRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(properties = "eureka.client.enabled=false")
 public class GenerateTestEvents {
 
