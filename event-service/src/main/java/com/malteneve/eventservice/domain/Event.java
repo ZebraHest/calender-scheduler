@@ -3,6 +3,8 @@ package com.malteneve.eventservice.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -17,13 +19,20 @@ public class Event {
     @GeneratedValue
     private Integer id;
 
+    @NotBlank
     private String title;
     private String description;
+
+    @NotNull
     private LocalDateTime startTime;
+
+    @NotNull
     private LocalDateTime endTime;
     private LocalDate repeatStartDate;
     private LocalDate repeatEndDate;
     private Duration duration;
+
+    @NotBlank
     private String userId;
     private Boolean isFlexible = false;
     private Boolean isRepeating = false;

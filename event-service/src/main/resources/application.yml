@@ -9,10 +9,10 @@ spring:
       enabled: true
 
   gateway:
-    httpclient:
-      wiretap: true
-      httpserver:
-        wiretap: true
+    #    httpclient:
+    #      wiretap: true
+    #      httpserver:
+    #        wiretap: true
     globalcors:
       cors-configurations:
         '[/**]':
@@ -21,15 +21,15 @@ spring:
             - GET
               - POST
 
-logging:
-  level:
-    reactor:
-      netty: INFO
-    org:
-      springframework:
-        http:
-          DEBUG
-        web:
-          DEBUG
-        security:
-          DEBUG
+#logging:
+#  level:
+#    reactor:
+#      netty: INFO
+#    org:
+#      springframework:
+#        http:
+#          DEBUG
+#        web:
+#          DEBUG
+#        security:
+#          DEBUG
