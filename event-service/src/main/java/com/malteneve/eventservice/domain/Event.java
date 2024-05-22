@@ -19,20 +19,20 @@ public class Event {
     @GeneratedValue
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Title can not be empty")
     private String title;
     private String description;
 
-    @NotNull
+    @NotNull(message = "StartTime can not be empty")
     private LocalDateTime startTime;
 
-    @NotNull
+    @NotNull(message = "EndTime can not be empty")
     private LocalDateTime endTime;
     private LocalDate repeatStartDate;
     private LocalDate repeatEndDate;
     private Duration duration;
 
-    @NotBlank
+    @NotBlank(message = "UserId can not be empty")
     private String userId;
     private Boolean isFlexible = false;
     private Boolean isRepeating = false;

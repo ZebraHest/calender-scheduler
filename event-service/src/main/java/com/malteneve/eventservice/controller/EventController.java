@@ -3,7 +3,9 @@ package com.malteneve.eventservice.controller;
 import com.malteneve.eventservice.domain.Event;
 import com.malteneve.eventservice.repository.EventRepository;
 import com.malteneve.eventservice.validator.AddEventValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -23,16 +25,18 @@ public class EventController {
     }
 
     @PostMapping("/add")
-    public String createEvent(
-            @Validated @RequestBody Event event
+    @ResponseBody
+    public HttpStatus createEvent(
+            @Validated @Valid @RequestBody Event event
     ) {
         System.out.println("Starting to create event");
         eventRepository.save(event);
-        return "Event created.";
+        return HttpStatus.CREATED;
     }
 
     @GetMapping("/all")
     public Iterable<Event> getAllUsers() {
         return eventRepository.findAll();
     }
+
 }

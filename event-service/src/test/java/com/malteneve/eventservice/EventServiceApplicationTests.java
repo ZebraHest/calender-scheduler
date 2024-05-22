@@ -46,10 +46,10 @@ class EventServiceApplicationTests {
         HttpEntity<String> request =
                 new HttpEntity<String>(jsonObject.toString(), headers);
 
-        String o = restTemplate.postForObject(
+        Object o = restTemplate.postForObject(
                 "http://localhost:" + port + "/add",
                 request,
-                String.class);
+                Object.class);
 
         System.out.println(o);
     }
