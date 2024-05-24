@@ -123,4 +123,12 @@ public class Scheduler {
         }
         return expandedList;
     }
+
+    public void deleteEvent(Integer eventId) {
+        List<ScheduledEvent> list = findScheduledEvents()
+                .stream()
+                .filter(e -> e.getEventId().equals(eventId))
+                .toList();
+        repository.deleteAll(list);
+    }
 }

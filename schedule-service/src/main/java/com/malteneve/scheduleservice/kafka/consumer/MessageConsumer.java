@@ -12,8 +12,14 @@ public class MessageConsumer {
     SchedulerController controller;
 
     @KafkaListener(topics = "new-event", groupId = "schedule-service")
-    public void listen(String message) {
-        System.out.println("Received message in scheduler: " + message);
+    public void listenNewEvent(String message) {
+        System.out.println("Received new event message in scheduler: " + message);
+        controller.addSingle(Integer.valueOf(message));
+    }
+
+    @KafkaListener(topics = "update-event", groupId = "schedule-service")
+    public void listenUpdateEvent(String message) {
+        System.out.println("Received update event message in scheduler: " + message);
         controller.updateSingle(Integer.valueOf(message));
     }
 

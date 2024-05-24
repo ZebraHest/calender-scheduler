@@ -4,12 +4,9 @@ import com.malteneve.scheduleservice.domain.Event;
 import com.malteneve.scheduleservice.domain.ScheduledEvent;
 import com.malteneve.scheduleservice.logic.Scheduler;
 import com.malteneve.scheduleservice.repository.ScheduledEventRepository;
+import com.malteneve.scheduleservice.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,31 +14,45 @@ import java.util.Collection;
 @RestController
 public class SchedulerController {
 
-    private static final String eventAllUrl = "http://localhost:8082/all";
-    private static final String eventSingleUrl = "http://localhost:8082/get?eventId=";
+
     @Autowired
     ScheduledEventRepository repository;
     @Autowired
     Scheduler scheduler;
+    @Autowired
+    EventService eventService;
+
+    @PostMapping("/add-all")
+    public void updateSchedule() {
+        Event[] events = eventService.getEvents();
+        calculate(events);
+    }
+
+    @PostMapping("/add-single")
+    public void addSingle(
+            @RequestParam("eventId") Integer eventId
+    ) {
+        Event event = eventService.getEvent(eventId);
+        calculate(new Event[]{event});
+    }
 
     @PostMapping("/update")
-    public void updateSchedule() {
-        RestTemplate restTemplate = new RestTemplate();
-        Event[] events = restTemplate.getForObject(eventAllUrl, Event[].class);
-        update(events);
-    }
-
-    @PostMapping("/updatesingle")
     public void updateSingle(
-            Integer eventId
+            @RequestParam("eventId") Integer eventId
     ) {
-        RestTemplate restTemplate = new RestTemplate();
-        Event event = restTemplate.getForObject(eventSingleUrl + eventId, Event.class);
-        update(new Event[]{event});
+        deleteSingle(eventId);
+        addSingle(eventId);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteSingle(
+            @RequestParam("eventId") Integer eventId
+    ) {
+        scheduler.deleteEvent(eventId);
     }
 
 
-    public void update(Event[] events) {
+    public void calculate(Event[] events) {
         if (events == null)
             return;
 

@@ -39,14 +39,15 @@ public class EventController {
         return HttpStatus.CREATED;
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ResponseBody
     public HttpStatus updateEvent(
             @Validated @Valid @RequestBody Event event
     ) {
+//        eventRepository.deleteById(event.getId());
         eventRepository.save(event);
-        messageProducer.sendMessage("new-event", event.getId().toString());
-        return HttpStatus.CREATED;
+        messageProducer.sendMessage("update-event", event.getId().toString());
+        return HttpStatus.OK;
     }
 
     @GetMapping("/all")
