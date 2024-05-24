@@ -18,6 +18,7 @@ import java.util.Collection;
 public class SchedulerController {
 
     private static final String eventAllUrl = "http://localhost:8082/all";
+    private static final String eventSingleUrl = "http://localhost:8082/get?eventId=";
     @Autowired
     ScheduledEventRepository repository;
     @Autowired
@@ -27,6 +28,20 @@ public class SchedulerController {
     public void updateSchedule() {
         RestTemplate restTemplate = new RestTemplate();
         Event[] events = restTemplate.getForObject(eventAllUrl, Event[].class);
+        update(events);
+    }
+
+    @PostMapping("/updatesingle")
+    public void updateSingle(
+            Integer eventId
+    ) {
+        RestTemplate restTemplate = new RestTemplate();
+        Event event = restTemplate.getForObject(eventSingleUrl + eventId, Event.class);
+        update(new Event[]{event});
+    }
+
+
+    public void update(Event[] events) {
         if (events == null)
             return;
 
