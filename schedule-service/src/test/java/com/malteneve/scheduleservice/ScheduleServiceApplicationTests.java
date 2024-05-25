@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.malteneve.scheduleservice.controller.SchedulerController;
 import com.malteneve.scheduleservice.domain.Event;
 import com.malteneve.scheduleservice.domain.ScheduledEvent;
+import com.malteneve.scheduleservice.logic.RequestHandler;
 import com.malteneve.scheduleservice.service.EventService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,8 @@ class ScheduleServiceApplicationTests {
 
     @MockBean
     EventService eventService;
+    @Autowired
+    RequestHandler handler;
     @LocalServerPort
     private int port;
     @Autowired
@@ -36,9 +39,9 @@ class ScheduleServiceApplicationTests {
 
         Event[] events = eventService.getEvents();
 
-        controller.updateSchedule();
+        handler.addAllEvents();
         ArrayList<ScheduledEvent> scheduledEventsFirst = Lists.newArrayList(controller.getScheduledEvents());
-        controller.updateSingle(2);
+        handler.updateEvent(2);
 
         ArrayList<ScheduledEvent> scheduledEvents = Lists.newArrayList(controller.getScheduledEvents());
         assert scheduledEvents.size() == 2;
