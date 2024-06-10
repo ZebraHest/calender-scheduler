@@ -58,9 +58,6 @@ public class Scheduler {
         }
 
         for (Event event : flexibleEvents) {
-            if (schedule.addIfAble(event)) {
-                continue;
-            }
             LocalDateTime firstAvailableTime = schedule.getFirstAvailableTime(event);
             if (firstAvailableTime == null) {
                 return Collections.emptyList();

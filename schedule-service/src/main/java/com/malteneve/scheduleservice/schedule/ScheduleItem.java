@@ -50,9 +50,7 @@ public class ScheduleItem implements Comparable<ScheduleItem> {
     }
 
     public void addAllEvent(List<Event> events) {
-        for (Event event : events) {
-            eventList.add(event);
-        }
+        eventList.addAll(events);
     }
 
     @Override

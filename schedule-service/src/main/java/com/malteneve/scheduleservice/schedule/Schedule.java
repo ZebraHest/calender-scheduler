@@ -65,6 +65,11 @@ public class Schedule {
 
         if (lowerEntry != null) {
             possibleStartTime = lowerEntry.getValue().getEndTime();
+
+            if (possibleStartTime.isBefore(startTime)) {
+                possibleStartTime = startTime;
+            }
+
             if (isAbleToAdd(possibleStartTime, possibleStartTime.plus(duration))) {
                 return possibleStartTime;
             }

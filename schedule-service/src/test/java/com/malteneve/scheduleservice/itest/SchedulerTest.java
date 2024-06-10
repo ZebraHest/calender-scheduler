@@ -72,8 +72,25 @@ public class SchedulerTest {
         event3.setEndTime(LocalDateTime.of(2024, 5, 12, 16, 0));
         events.add(event3);
 
+        Event event4 = new Event();
+        event4.setTitle("4");
+        event4.setStartTime(LocalDateTime.of(2024, 5, 13, 10, 0));
+        event4.setEndTime(LocalDateTime.of(2024, 5, 18, 0, 0));
+        event4.setDuration(Duration.ofHours(2));
+        event4.setFlexible(true);
+        events.add(event4);
+
         Collection<ScheduledEvent> scheduledEvents = scheduler.schedule(events);
 
-        assert scheduledEvents == null;
+        ScheduledEvent sEvent1 = scheduledEvents.stream().filter(e -> e.getTitle().equals("1")).findFirst().get();
+        ScheduledEvent sEvent2 = scheduledEvents.stream().filter(e -> e.getTitle().equals("2")).findFirst().get();
+        ScheduledEvent sEvent3 = scheduledEvents.stream().filter(e -> e.getTitle().equals("3")).findFirst().get();
+        ScheduledEvent sEvent4 = scheduledEvents.stream().filter(e -> e.getTitle().equals("4")).findFirst().get();
+
+        assert sEvent1.getStartTime().equals(event1.getStartTime());
+        assert sEvent3.getStartTime().equals(event3.getStartTime());
+        assert sEvent2.getStartTime().toString().equals("2024-05-12T16:00");
+        assert sEvent4.getStartTime().toString().equals("2024-05-13T10:00");
+
     }
 }
