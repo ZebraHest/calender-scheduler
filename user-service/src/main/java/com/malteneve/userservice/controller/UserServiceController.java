@@ -10,10 +10,7 @@ import com.malteneve.userservice.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -27,19 +24,13 @@ public class UserServiceController {
     @Autowired
     private UserRepository userRepository;
 
-    //    @PostMapping("/add")
-//    public @ResponseBody String createUser(
-//            @RequestParam(value = "name") String name) {
-//
-//        User n = new User();
-//        n.setName(name);
-//        userRepository.save(n);
-//        return "test";
-//    }
-//
-    @GetMapping("/all")
-    public Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+
+    @PostMapping("/validatetoken")
+    public ResponseEntity<UserDto> validate(@RequestParam(name = "token") String token) {
+        System.out.println("VALIDATE ATTEMPT");
+        UserDto user = (UserDto) authProvider.validateToken(token).getPrincipal();
+        user.setToken(token);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
@@ -57,4 +48,11 @@ public class UserServiceController {
         user.setToken(authProvider.createToken(user));
         return ResponseEntity.created(URI.create("/users/" + user.getId())).body(user);
     }
+
+    @GetMapping("/all")
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+
 }
