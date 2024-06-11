@@ -62,5 +62,12 @@ public class EventController {
         return eventRepository.findById(eventId).orElse(null);
     }
 
+    @DeleteMapping("/delete")
+    public HttpStatus deleteEvent(@RequestParam("id") Integer id) {
+        eventRepository.deleteById(id);
+        messageProducer.sendMessage("delete-event", id.toString());
+        return HttpStatus.OK;
+    }
+
 
 }
