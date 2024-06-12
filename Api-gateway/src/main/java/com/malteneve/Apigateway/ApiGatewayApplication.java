@@ -42,6 +42,7 @@ public class ApiGatewayApplication {
 
                 .route(r -> r.path("/scheduler/**")
                         .filters(f -> f
+                                .filter(filter)
                                 .stripPrefix(1))
                         .uri("http://localhost:8083"))
                 .build();
